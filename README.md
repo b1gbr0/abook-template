@@ -119,10 +119,19 @@ ffmpeg -f concat -safe 0 -i build/list.txt \
   build/audio.m4a
 ```
 
+Можно указать требуемое качество. Ниже пример, если требуется фиксированный битрейт в 64k
+
+```bash
+ffmpeg -f concat -safe 0 -i build/list.txt \
+  -map 0:a:0 \
+  -c:a aac -b:a 64k \
+  build/audio.m4a
+```
+
 Что происходит:
 
 - MP3 декодируются
-- аудио кодируется в AAC (VBR)
+- аудио кодируется в AAC (VBR или 64k)
 - обложки и лишние стримы отбрасываются
 
 ---
