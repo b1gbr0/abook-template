@@ -119,19 +119,19 @@ ffmpeg -f concat -safe 0 -i build/list.txt \
   build/audio.m4a
 ```
 
-Можно указать требуемое качество. Ниже пример, если требуется фиксированный битрейт в 64k
+Можно указать требуемое качество. Ниже пример, если требуется фиксированный битрейт в 128k
 
 ```bash
 ffmpeg -f concat -safe 0 -i build/list.txt \
   -map 0:a:0 \
-  -c:a aac -b:a 64k \
+  -c:a aac -b:a 128k \
   build/audio.m4a
 ```
 
 Что происходит:
 
 - MP3 декодируются
-- аудио кодируется в AAC (VBR или 64k)
+- аудио кодируется в AAC (VBR или 128k)
 - обложки и лишние стримы отбрасываются
 
 ---
@@ -141,7 +141,7 @@ ffmpeg -f concat -safe 0 -i build/list.txt \
 Берём embedded cover из первого MP3:
 
 ```bash
-ffmpeg -i original/00-vvedenie.mp3 \
+ffmpeg -i original/01.mp3 \
   -an -map 0:v:0 -c:v copy \
   build/cover.jpg
 ```
@@ -212,3 +212,11 @@ ffprobe book.m4b
 - нормализация громкости (EBU R128)
 - валидация тегов
 - поддержка нескольких томов
+
+---
+
+## Полезные ссылки
+
+- [Prologue](https://prologue.audio/)
+- [Audiobookshelf](https://github.com/advplyr/audiobookshelf)
+- [M4B Metadata](https://github.com/prologueapp/Prologue/wiki/Metadata)
