@@ -48,6 +48,8 @@ ffmpeg -version
 
 ## Принцип работы пайплайна
 
+0. **Скачиваются исходные MP3** в папку `original/` (вручную или скриптом)
+
 1. **MP3 анализируются через ffprobe**
    - извлекаются теги книги (album, artist, year и т.д.)
    - извлекаются названия глав
@@ -61,6 +63,25 @@ ffmpeg -version
    - склеивает MP3
    - перекодирует звук в AAC (требование контейнера MP4/M4B)
    - добавляет метаданные и обложку
+
+---
+
+## Шаг 0. Подготовка исходных MP3
+
+Скачай или скопируй MP3-файлы в папку `original/`. Каждый файл — отдельная глава.
+
+```bash
+#!/bin/bash
+
+for i in {01..99}; do
+  wget "https://example.com/audio/123/chapter-(printf %02d $i).mp3"
+done
+
+mkdir ../build
+
+wget -O ../build/cover.jpg "https://example.com/audio/123/cover.jpg"
+
+```
 
 ---
 
